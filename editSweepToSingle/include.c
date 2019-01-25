@@ -12,7 +12,8 @@ int main(void) {
 	FILE *fp; // FILE型構造体
 	char file_name[] = "data/sweep_saf_w.txt";
   int chr;
-  char str[N];
+  char str[N],str1[N],str2[N],str3[N];
+  float f1,f2,f3;
 
 	fp = fopen(file_name, "r"); // ファイルを開く。失敗するとNULLを返す。
 
@@ -32,10 +33,16 @@ int main(void) {
   第2引数には1行の最大文字数を入力、
   第3引数にFILE型構造体の実体のアドレス。
   */
-  while(fgets(str, N, fp) != NULL) {
-    printf("%s", str);
+  // while(fgets(str, N, fp) != NULL) {
+  //   printf("%s", str);
+  // }
+ int i = 0;
+  while (fscanf(fp, "\t%s\t%s\t%s", str1, str2, str3) !=EOF) {
+    i += 1;
+    if (i <= 10) {
+      printf("%s,%s,%s\n",str1,str2,str3);
+    }
   }
-
 	fclose(fp); // ファイルを閉じる
 
 	//C++でしか使えないので以下のerror_t型は使用できない。
