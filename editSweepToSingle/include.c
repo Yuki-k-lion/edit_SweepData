@@ -4,18 +4,37 @@
 //   return 0;
 // }
 #include <stdio.h>
+#include <stdlib.h>
+#define N 256 // 1行の最大文字数(バイト数)
+//https://www.sejuku.net/blog/25927
 
 int main(void) {
 	FILE *fp; // FILE型構造体
 	char file_name[] = "data/sweep_saf_w.txt";
+  int chr;
+  char str[N];
 
 	fp = fopen(file_name, "r"); // ファイルを開く。失敗するとNULLを返す。
+
 	if(fp == NULL) {
 		printf("%s file not open!\n", file_name);
 		return -1;
 	} else {
 		printf("%s file opened!\n", file_name);
 	}
+
+  //一文字ずつ読み込み。fgetc関数は引数にFILE型構造体の実体のアドレスをとる
+  // while((chr = fgetc(fp)) != EOF) {
+	// 	putchar(chr);
+	// }
+  /*
+  fgets関数の第1引数には1行分の文字列を格納する配列、
+  第2引数には1行の最大文字数を入力、
+  第3引数にFILE型構造体の実体のアドレス。
+  */
+  while(fgets(str, N, fp) != NULL) {
+    printf("%s", str);
+  }
 
 	fclose(fp); // ファイルを閉じる
 
