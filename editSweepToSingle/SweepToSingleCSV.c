@@ -7,7 +7,7 @@
 
 int main(void) {
   //宣言
-	FILE *fp; // FILE型構造体
+	FILE *fp,*fpw; // FILE型構造体
 	char file_name[] = "../data/sweep_saf_w_edit.txt";
   char new_filename[N],single_data[ROW][COL][N];
   // float single_data[ROW][COL];
@@ -27,7 +27,7 @@ int main(void) {
   //ファイルの中身を取り出して表示
   int datacount = 0;
    while (fscanf(fp, "\t%s\t%s\t%s", str1, str2, str3) !=EOF) {
-     datacount += 1;
+
      if (datacount <= 10) {
        strcpy(single_data[datacount][0],str1);
        strcpy(single_data[datacount][1],str2);
@@ -41,24 +41,27 @@ int main(void) {
          single_data[datacount][0],
          single_data[datacount][1],
          single_data[datacount][2]);
-
      }
+     datacount += 1;
    }
 	fclose(fp); // ファイルを閉じる
+
+  // printf("wright: %s\n", single_data[0][0]);
+
   //うまくいかない
   //処理結果の書き込み。
-  // for (datacount = 0; datacount < ROW; datacount++) {
-  //   sprintf(new_filename,"..data/%d.csv",datacount);
-  //   //file open
-  //   printf("%s\n", single_data[datacount][0]);
-  //   fp = fopen(new_filename,"w");
-  //   // printf("%s\n", new_filename);
-  //     // if (fp == NULL) {
-  //     //   printf("%s File can't open.\n",new_filename);
-  //     // } else {
-  //     //   fprintf(fp, "\t%s\t%s\n", single_data[datacount][1],single_data[datacount][2]);
-  //     // }
-  //   }
-  // fclose(fp);
+  for (datacount = 0; datacount <= ROW; datacount++) {
+    sprintf(new_filename,"../data/single/%d.csv",datacount);
+    //file open
+    printf("single_data:%s\n", single_data[datacount][0]);
+    fpw = fopen(new_filename,"w");
+    printf("new_filename:%s\n", new_filename);
+      if (fp == NULL) {
+        printf("%s File can't open.\n",new_filename);
+      } else {
+        fprintf(fpw, "\t%s\t%s\n", single_data[datacount][1],single_data[datacount][2]);
+      }
+    }
+  fclose(fpw);
 	return 0;
 }
