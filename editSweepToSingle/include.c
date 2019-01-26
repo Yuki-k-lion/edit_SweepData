@@ -10,7 +10,7 @@
 
 int main(void) {
 	FILE *fp; // FILE型構造体
-	char file_name[] = "data/sweep_saf_w.txt";
+	char file_name[] = "../data/sweep_saf_w_edit.txt";
   int chr;
   char str[N],str1[N],str2[N],str3[N];
   float f1,f2,f3;
@@ -44,6 +44,16 @@ int main(void) {
     }
   }
 	fclose(fp); // ファイルを閉じる
+  // if ((fp = fopen(file_name, "r")) != NULL) {
+  // /* 1行空読み */
+  // fgets(str, sizeof(str), fp);
+  // /* ２行目を読み込み */
+  // if (fgets(str, sizeof(str), fp))
+  // printf("%s", str);
+  //
+  // fclose(fp);
+  // }
+
 
 	//C++でしか使えないので以下のerror_t型は使用できない。
   // C11で導入　VisualC++2012以降ではこちらのみ使用可能
