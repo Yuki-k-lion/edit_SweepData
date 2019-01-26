@@ -37,12 +37,27 @@ int main(void) {
        // single_data[datacount][2] = str3;
        printf("%s,%s,%s\n",str1,str2,str3);
        printf("datacount\n");
-       printf("%s,%s,%s\n",
+       printf("\t%s\t%s\t%s\n",
          single_data[datacount][0],
          single_data[datacount][1],
          single_data[datacount][2]);
+
      }
    }
 	fclose(fp); // ファイルを閉じる
+
+  //処理結果の書き込み。
+  for (datacount = 0; datacount < ROW; datacount++) {
+    sprintf(new_filename,"..data/%s.csv",single_data[datacount][0]);
+    //file open
+    fp = fopen(new_filename,"w");
+
+    if (fp == NULL) {
+      printf("%s File can't open.\n",new_filename);
+    } else {
+      fprintf(fp, "\t%s\t%s\n", single_data[datacount][1],single_data[datacount][2]);
+    }
+  }
+  fclose(fp);
 	return 0;
 }
