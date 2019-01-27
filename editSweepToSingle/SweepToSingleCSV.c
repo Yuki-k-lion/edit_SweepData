@@ -43,12 +43,12 @@ int main(void) {
        strcpy(single_data[data_number][0],str1);
        strcpy(single_data[data_number][1],str2);
        strcpy(single_data[data_number][2],str3);
-       printf("%s,%s,%s\n",str1,str2,str3);
-       printf("datacount:%d\n",datacount);
-       printf("\t%s\t%s\t%s\n",
-         single_data[data_number][0],
-         single_data[data_number][1],
-         single_data[data_number][2]);
+       // printf("%s,%s,%s\n",str1,str2,str3);
+       // printf("datacount:%d\n",datacount);
+       // printf("\t%s\t%s\t%s\n",
+       //   single_data[data_number][0],
+       //   single_data[data_number][1],
+       //   single_data[data_number][2]);
      }
       datacount += 1;
    }
@@ -74,7 +74,7 @@ int fileout(char data_out[ROW][COL][N]){
   int datacount;
 
   for (datacount = 0; datacount <= ROW; datacount++) {
-    sprintf(new_filename,"../data/single/%.3s.csv",data_out[1][0]);
+    sprintf(new_filename,"../data/single/%d.csv",datacount);
     //file open
     printf("debug02:b\t%s\t%s\t%s\n",
       data_out[datacount][0],
