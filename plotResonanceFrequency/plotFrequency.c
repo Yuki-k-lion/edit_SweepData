@@ -31,7 +31,7 @@ int main(void) {
        strcpy(single_data[data_number][0],str1);
        strcpy(single_data[data_number][1],str2);
        strcpy(single_data[data_number][2],str3);
-       fileout(single_data,freq_data,count_file);
+       freq_data = fileout(single_data,freq_data,count_file);
        //出てくるべきファイル数のカウント
        count_file += 1;
      } else {
@@ -50,7 +50,7 @@ char plotwideTofreq(char plot_data[ROW][COL][N],char data_out[ROW][2], int count
   int i,temp_min_int;
   char temp_min[ROW][N];
   float temp_min_f[ROW][COL];
-
+  int max_f = 55;
   //初期化
   // for (i = 0; i < ROW; i++) {
   //     temp_min_f
@@ -59,13 +59,12 @@ char plotwideTofreq(char plot_data[ROW][COL][N],char data_out[ROW][2], int count
 
   //最小値の格納
   for (i = 0; i < ROW; i++) {
-    if (temp_min_int > strtof(plot_data[i][2], NULL, 10)) {
+    if ((temp_min_int > strtof(plot_data[i][2], NULL, 10)) && (max_f >= strtof(plot_data[i][1], NULL, 10))) {
         temp_min_int = strtof(plot_data[i][2], NULL, 10);
         strcpy(temp_min,plot_data[i]);
     }
   }
   data_out[count_file_num][0] = temp_min[0];
   data_out[count_file_num][1] = temp_min[1];
-
   return data_out;
 }
