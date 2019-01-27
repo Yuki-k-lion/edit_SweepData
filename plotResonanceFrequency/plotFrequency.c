@@ -67,8 +67,8 @@ char plotwideTofreq(char plot_data[ROW][COL][N],char data_out[ROW][2], int count
         strcpy(temp_min,plot_data[i]);
     }
   }
-  // data_out[count_file_num][0] = temp_min[0];
-  // data_out[count_file_num][1] = temp_min[1];
-  // return data_out;
-  return 0;
+  data_out[count_file_num][0] = temp_min[0];
+  data_out[count_file_num][1] = temp_min[1];
+  return data_out;
+  // return 0;
 }
