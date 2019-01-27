@@ -3,7 +3,7 @@
 #include <string.h>
 #define N 256 // 1行の最大文字数(バイト数)
 #define COL 3 //ファイルデータの列数
-#define ROW 1000 //ファイルデータの行数
+#define ROW 1001 //ファイルデータの行数
 int fileout(char data_array[ROW][COL][N]); /* プロトタイプ宣言 */
 
 int main(void) {
@@ -14,7 +14,7 @@ int main(void) {
   // float single_data[ROW][COL];
   char str[N],str1[N],str2[N],str3[N];
   // float f1,f2,f3;
-  int file_number;
+  int file_number,count_file=0;
 
 	fp = fopen(file_name, "r"); // ファイルを開く。失敗するとNULLを返す。
 
@@ -29,41 +29,41 @@ int main(void) {
   //ファイルの中身を取り出して表示
   int datacount = 0;
    while (fscanf(fp, "\t%s\t%s\t%s", str1, str2, str3) !=EOF){
-     if (datacount%1000 == 0){
-     strcpy(single_data[1000][0],str1);
-     strcpy(single_data[1000][1],str2);
-     strcpy(single_data[1000][2],str3);
-     fileout(single_data);
-
-     } else {
-      file_number = datacount%1000;
-       strcpy(single_data[file_number][0],str1);
-       strcpy(single_data[file_number][1],str2);
-       strcpy(single_data[file_number][2],str3);
-         printf("%s,%s,%s\n",str1,str2,str3);
-         printf("datacount:%d\n",datacount);
-         printf("\t%s\t%s\t%s\n",
-           single_data[file_number][0],
-           single_data[file_number][1],
-           single_data[file_number][2]);
+     file_number = datacount%1001;
+     if (file_number == 1000) {
+       count_file += 1;
      }
+     printf("%d\n", file_number);
+     // if (datacount%1000 == 0){
+     // strcpy(single_data[1000][0],str1);
+     // strcpy(single_data[1000][1],str2);
+     // strcpy(single_data[1000][2],str3);
+     // fileout(single_data);
+     //
+     // } else {
+     //  file_number = datacount%1000;
+     //   strcpy(single_data[file_number][0],str1);
+     //   strcpy(single_data[file_number][1],str2);
+     //   strcpy(single_data[file_number][2],str3);
+     //     printf("%s,%s,%s\n",str1,str2,str3);
+     //     printf("datacount:%d\n",datacount);
+     //     printf("\t%s\t%s\t%s\n",
+     //       single_data[file_number][0],
+     //       single_data[file_number][1],
+     //       single_data[file_number][2]);
+     // }
       datacount += 1;
    }
-   printf("datacount:%d\n",datacount);
-   // datacount = 1;
-   // printf("Re:datacount:%d\n",datacount);
-   // printf("debug01:\t%s\t%s\t%s\n",
-   //   single_data[datacount][0],
-   //   single_data[datacount][1],
-   //   single_data[datacount][2]);
-  int i;
-  for (i = 0; i < datacount; i++) {
-    printf("Re:datacount:%d\n",i);
-    printf("debug02:\t%s\t%s\t%s\n",
-      single_data[i][0],
-      single_data[i][1],
-      single_data[i][2]);
-  }
+   // printf("datacount:%d\n",datacount);
+   printf("count_file:%d\n", count_file);
+  // int i;
+  // for (i = 0; i < datacount; i++) {
+  //   printf("Re:datacount:%d\n",i);
+  //   printf("debug02:\t%s\t%s\t%s\n",
+  //     single_data[i][0],
+  //     single_data[i][1],
+  //     single_data[i][2]);
+  // }
   fclose(fp); // ファイルを閉じる
 	return 0;
 }
