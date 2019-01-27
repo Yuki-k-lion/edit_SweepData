@@ -14,7 +14,7 @@ int main(void) {
   // float single_data[ROW][COL];
   char str[N],str1[N],str2[N],str3[N];
   // float f1,f2,f3;
-  int file_number,count_file=0;
+  int data_number,count_file=0;
 
 	fp = fopen(file_name, "r"); // ファイルを開く。失敗するとNULLを返す。
 
@@ -29,29 +29,27 @@ int main(void) {
   //ファイルの中身を取り出して表示
   int datacount = 0;
    while (fscanf(fp, "\t%s\t%s\t%s", str1, str2, str3) !=EOF){
-     file_number = datacount%1001;
-     if (file_number == 1000) {
+     data_number = datacount%1001;
+
+     if ( data_number == 1000){
+       printf("%d\n", data_number);
+       strcpy(single_data[data_number][0],str1);
+       strcpy(single_data[data_number][1],str2);
+       strcpy(single_data[data_number][2],str3);
+       fileout(single_data);
+       //出てくるべきファイル数のカウント
        count_file += 1;
+     } else {
+       strcpy(single_data[data_number][0],str1);
+       strcpy(single_data[data_number][1],str2);
+       strcpy(single_data[data_number][2],str3);
+       printf("%s,%s,%s\n",str1,str2,str3);
+       printf("datacount:%d\n",datacount);
+       printf("\t%s\t%s\t%s\n",
+         single_data[data_number][0],
+         single_data[data_number][1],
+         single_data[data_number][2]);
      }
-     printf("%d\n", file_number);
-     // if (datacount%1000 == 0){
-     // strcpy(single_data[1000][0],str1);
-     // strcpy(single_data[1000][1],str2);
-     // strcpy(single_data[1000][2],str3);
-     // fileout(single_data);
-     //
-     // } else {
-     //  file_number = datacount%1000;
-     //   strcpy(single_data[file_number][0],str1);
-     //   strcpy(single_data[file_number][1],str2);
-     //   strcpy(single_data[file_number][2],str3);
-     //     printf("%s,%s,%s\n",str1,str2,str3);
-     //     printf("datacount:%d\n",datacount);
-     //     printf("\t%s\t%s\t%s\n",
-     //       single_data[file_number][0],
-     //       single_data[file_number][1],
-     //       single_data[file_number][2]);
-     // }
       datacount += 1;
    }
    // printf("datacount:%d\n",datacount);
