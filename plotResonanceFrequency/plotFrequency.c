@@ -48,7 +48,8 @@ int main(void) {
 
 char plotwideTofreq(char plot_data[ROW][COL][N],char data_out[ROW][2], int count_file_num){
   int i,temp_min_int;
-  char temp_min[ROW][N], *endptr;
+  char temp_min[COL][N];
+  char *endptr;
   float temp_min_f[ROW][COL];
   int max_f = 55;
   float freq_val;
