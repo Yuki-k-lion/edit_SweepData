@@ -47,8 +47,8 @@ int main(void) {
 }
 
 char plotwideTofreq(char plot_data[ROW][COL][N],char data_out[ROW][2], int count_file_num){
-  int i,temp_min_int;
-  char temp_min[COL][N];
+  int i,temp_min_int,temp_min_data;
+  // char temp_min[COL][N];
   char *endptr;
   float temp_min_f[ROW][COL];
   int max_f = 55;
@@ -64,11 +64,14 @@ char plotwideTofreq(char plot_data[ROW][COL][N],char data_out[ROW][2], int count
     freq_val = strtof(plot_data[i][2], &endptr);
     if ((temp_min_int > freq_val ) && (max_f >= freq_val)) {
         temp_min_int = freq_val;
-        strcpy(temp_min,plot_data[i]);
+        // strcpy(&temp_min,plot_data[i]);
+        temp_min_data = i;
     }
   }
-  data_out[count_file_num][0] = temp_min[0];
-  data_out[count_file_num][1] = temp_min[1];
+  // data_out[count_file_num][0] = temp_min[0];
+  // data_out[count_file_num][1] = temp_min[1];
+  data_out[count_file_num][0] = plot_data[temp_min_data][0];
+  data_out[count_file_num][1] = plot_data[temp_min_data][1];
   return data_out;
   // return 0;
 }
