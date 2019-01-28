@@ -34,7 +34,7 @@ int main(void) {
        strcpy(single_data[data_number][0],str1);
        strcpy(single_data[data_number][1],str2);
        strcpy(single_data[data_number][2],str3);
-       freq_data = plotwideTofreq(single_data,freq_data,count_file);
+       
        plotwideTofreq(single_data,freq_data,count_file);
        //出てくるべきファイル数のカウント
        count_file += 1;
