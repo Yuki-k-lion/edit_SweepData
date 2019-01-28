@@ -18,6 +18,14 @@ int main(void) {
   int data_number,count_file=0;
   char *freq_data[ROW][2]; //解析結果のデータ格納
 
+  //初期化
+  int i,j;
+  for (i = 0; i < ROW; i++) {
+    for (j = 0; j < 2; j++) {
+      freq_data[i][j] = "";
+    }
+  }
+
 	fp = fopen(file_name, "r"); // ファイルを開く。失敗するとNULLを返す。
   //ファイルがひらけたかどうかの確認
 	if(fp == NULL) {
@@ -34,7 +42,7 @@ int main(void) {
        strcpy(single_data[data_number][0],str1);
        strcpy(single_data[data_number][1],str2);
        strcpy(single_data[data_number][2],str3);
-       
+
        plotwideTofreq(single_data,freq_data,count_file);
        //出てくるべきファイル数のカウント
        count_file += 1;
@@ -51,25 +59,35 @@ int main(void) {
 }
 
 int plotwideTofreq(char plot_data[ROW][COL][N],char *data_out[ROW][2], int count_file_num){
-  int i,temp_min_int,temp_min_data;
-  // char temp_min[COL][N];
+  int i,temp_min_data;
   char *endptr;
   float temp_min_f[ROW][COL];
   int max_f = 55;
-  float freq_val;
+  float freq_val,temp_min_int,temp_f;
   temp_min_int = 2;
 
   // //最小値の格納
   for (i = 0; i < ROW; i++) {
     freq_val = strtof(plot_data[i][2], &endptr);
-    if ((temp_min_int > freq_val ) && (max_f >= freq_val)) {
+    temp_f = strtof(plot_data[i][1],&endptr);
+    if ((temp_min_int > freq_val ) && (max_f >= temp_f)) {
         temp_min_int = freq_val;
         temp_min_data = i;
+        printf("temp_min_data:%d\n",temp_min_data );
+        printf("freq_val:%f\n",freq_val );
+        printf("temp_min_int:%f\n",temp_min_int );
     }
   }
+  printf("data_out[count_file_num][0] :%s\n",data_out[count_file_num][0] );
+  printf("data_out[count_file_num][1] :%s\n",data_out[count_file_num][1] );
+  printf("plot_data[temp_min_data][0] :%s\n",plot_data[temp_min_data][0] );
+  printf("plot_data[temp_min_data][1] :%s\n",plot_data[temp_min_data][1] );
+
   strcpy(data_out[count_file_num][0],plot_data[temp_min_data][0]);
   strcpy(data_out[count_file_num][1],plot_data[temp_min_data][1]);
-  fileout(data_out);
+
+  printf("data_out[count_file_num][0]:%s\n",data_out[count_file_num][0] );
+  // fileout(data_out);
   return 0;
 }
 
