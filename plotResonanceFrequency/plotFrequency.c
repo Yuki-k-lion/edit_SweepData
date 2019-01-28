@@ -4,7 +4,7 @@
 #define N 256 // 1行の最大文字数(バイト数)
 #define COL 3 //ファイルデータの列数
 #define ROW 1001 //ファイルデータの行数
-char **plotwideTofreq(char data_array[ROW][COL][N],char *freq_data[ROW][2][N],int count_file_num); /* プロトタイプ宣言 */
+int plotwideTofreq(char data_array[ROW][COL][N],char *freq_data[ROW][2],int count_file_num); /* プロトタイプ宣言 */
 
 int main(void) {
   //宣言
@@ -46,7 +46,7 @@ int main(void) {
 	return 0;
 }
 
-char **plotwideTofreq(char plot_data[ROW][COL][N],char *data_out[ROW][2][N], int count_file_num){
+int plotwideTofreq(char plot_data[ROW][COL][N],char *data_out[ROW][2], int count_file_num){
   int i,temp_min_int,temp_min_data;
   // char temp_min[COL][N];
   char *endptr;
@@ -72,8 +72,8 @@ char **plotwideTofreq(char plot_data[ROW][COL][N],char *data_out[ROW][2][N], int
   // data_out[count_file_num][1] = temp_min[1];
   // data_out[count_file_num][0] = plot_data[temp_min_data][0];
   // data_out[count_file_num][1] = plot_data[temp_min_data][1];
-  strcpy(plot_data[temp_min_data][0],data_out[count_file_num][0]);
-  strcpy(plot_data[temp_min_data][1],data_out[count_file_num][1]);
-  return data_out;
-  // return 0;
+  strcpy(data_out[count_file_num][0],plot_data[temp_min_data][0]);
+  strcpy(data_out[count_file_num][1],plot_data[temp_min_data][1]);
+  // return data_out;
+  return 0;
 }
