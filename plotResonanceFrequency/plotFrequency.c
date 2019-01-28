@@ -4,7 +4,10 @@
 #define N 256 // 1行の最大文字数(バイト数)
 #define COL 3 //ファイルデータの列数
 #define ROW 1001 //ファイルデータの行数
-int plotwideTofreq(char data_array[ROW][COL][N],char *freq_data[ROW][2],int count_file_num); /* プロトタイプ宣言 */
+
+/* プロトタイプ宣言 */
+int plotwideTofreq(char data_array[ROW][COL][N],char *freq_data[ROW][2],int count_file_num);
+int fileout(char *data_out[ROW][2]);
 
 int main(void) {
   //宣言
@@ -32,6 +35,7 @@ int main(void) {
        strcpy(single_data[data_number][1],str2);
        strcpy(single_data[data_number][2],str3);
        // freq_data = plotwideTofreq(single_data,freq_data,count_file);
+       plotwideTofreq(single_data,freq_data,count_file);
        //出てくるべきファイル数のカウント
        count_file += 1;
      } else {
@@ -75,5 +79,26 @@ int plotwideTofreq(char plot_data[ROW][COL][N],char *data_out[ROW][2], int count
   strcpy(data_out[count_file_num][0],plot_data[temp_min_data][0]);
   strcpy(data_out[count_file_num][1],plot_data[temp_min_data][1]);
   // return data_out;
+  fileout(data_out);
+  return 0;
+}
+
+int fileout(char *data_out[ROW][2]){
+  //処理結果の書き込み。
+  FILE *fpw;
+  char new_filename[N];
+  int datacount;
+  //create new file
+  // new_filename = "../data/plotFreqData/sweep.csv";
+  sprintf(new_filename,"../data/plotFreqData/sweep.csv");
+  fpw = fopen(new_filename,"w");
+    if (fpw == NULL) {
+      printf("%s File can't open.\n",new_filename);
+    } else {
+      for (datacount = 0; datacount <= ROW; datacount++) {
+        fprintf(fpw, "\t%s\t%s\n", data_out[datacount][0],data_out[datacount][1]);
+      }
+    }
+  fclose(fpw);
   return 0;
 }
