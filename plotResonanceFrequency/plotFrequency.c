@@ -19,12 +19,12 @@ int main(void) {
   char *freq_data[ROW][2]; //解析結果のデータ格納
 
   //初期化
-  int i,j;
-  for (i = 0; i < ROW; i++) {
-    for (j = 0; j < 2; j++) {
-      freq_data[i][j] = "";
-    }
-  }
+  // int i,j;
+  // for (i = 0; i < ROW; i++) {
+  //   for (j = 0; j < 2; j++) {
+  //     freq_data[i][j] = "";
+  //   }
+  // }
 
 	fp = fopen(file_name, "r"); // ファイルを開く。失敗するとNULLを返す。
   //ファイルがひらけたかどうかの確認
